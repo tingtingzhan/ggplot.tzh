@@ -78,10 +78,10 @@ ggScatter <- function(
   grp <- unique(c(as.character(colour), as.character(shape)))
   if (length(grp)) {
     names(grp) <- grp
-    corr <- lapply(grp, FUN = function(g) { # (g = grp[[1L]])
+    corr <- lapply(grp, FUN = \(g) { # (g = grp[[1L]])
       ds <- split.data.frame(x = data, f = data[[g]])
       names(ds) <- paste(g, names(ds), sep = '=')
-      cor_ <- lapply(ds, FUN = function(d) {
+      cor_ <- lapply(ds, FUN = \(d) {
         cor_test_sum(cor.test(d[[y]], d[[x]]))
       })
       do.call(rbind, args = cor_)
@@ -156,7 +156,7 @@ ggScatter2 <- function(
     labs(colour = '', shape = '')
   
   g <- ggplot_build(p) # ggplot2:::ggplot_build.ggplot
-  cols <- vapply(g$data, FUN = function(i) unique.default(i[['colour']]), FUN.VALUE = '')
+  cols <- vapply(g$data, FUN = \(i) unique.default(i[['colour']]), FUN.VALUE = '')
   p + theme(
     axis.text.y = element_text(colour = cols[1L], face = 'bold'),
     axis.ticks.y = element_line(colour = cols[1L], linewidth = 1),

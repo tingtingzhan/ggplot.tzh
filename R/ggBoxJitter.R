@@ -47,19 +47,7 @@ ggBoxJitter <- function(
   
   if (!is.data.frame(data) && is.list(data)) {
     
-    .Defunct(msg = 'function arg2nm() moved to package tzhInternal')
-    #cl <- match.call()
-    #cls <- is_equal(data, FUN = class) # list element must be of same class
-    #data_call <- cl[[2L]]
-    #if (!is.symbol(data_call) && data_call[[1L]] == 'lapply') data_call <- data_call[[2L]]
-    #data_call <- arg2nm(data_call)
-    
-    #if (all(cls == c('POSIXlt', 'POSIXt'))) data <- lapply(data, FUN = as.POSIXct.POSIXlt)
-    #if (!all(vapply(data, FUN = typeof, FUN.VALUE = '') %in% c('numeric', 'double'))) stop('all elements must be numeric-like')
-    #data <- data.frame(Values = do.call(c, args = data), Names = rep(names(data_call)[-1L], times = lengths(data, use.names = FALSE)))
-    #y <- quote(Values)
-    #x <- quote(Names)
-    #colour <- NULL
+    .Defunct(msg = 'use data.frame')
     
   } else if (is.matrix(data)) {
     
