@@ -30,7 +30,7 @@
 #' #ggBoxJitter(list(stack.loss, precip))
 #' #ggBoxJitter(list(stack.loss, btmean2 = boot_mean(precip, R = 999)))
 #' #ggBoxJitter(lapply(list(stack.loss, precip), boot_mean, R = 999))
-#' 
+#' @importFrom rlang .data
 #' @export
 ggBoxJitter <- function(
     data, y, x, 
@@ -61,8 +61,12 @@ ggBoxJitter <- function(
     
   }
   
-  mp_line <- eval(call('aes', x = x, y = y, colour = colour))
-  mp_point <- eval(call('aes', x = x, y = y, colour = colour, shape = colour))
+  if (is.null(colour)) {
+    mp_line <- mp_point <- aes(x = .data[[x]], y = .data[[y]])
+  } else {
+    mp_line <- aes(x = .data[[x]], y = .data[[y]], colour = .data[[colour]])
+    mp_point <- aes(x = .data[[x]], y = .data[[y]], colour = .data[[colour]], shape = .data[[colour]])
+  }
 
   ggplot() + 
     (if (violin) geom_violin(data = data, mapping = mp_line, position = position_dodge(width = dodge.width))) + 

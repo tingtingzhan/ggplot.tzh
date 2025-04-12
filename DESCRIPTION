@@ -6,7 +6,7 @@ Date: 2024-04-08
 Description: Tingting's Extension of ggplot2.
 License: GPL-2
 Encoding: UTF-8
-Imports: dplyr, metR, reshape2, scales, zoo
+Imports: dplyr, metR, reshape2, rlang, scales, zoo
 Suggests: splines, plotly
 Authors@R: c(person(given = "Tingting", family =
      "Zhan", role = c("aut", "cre"), email =

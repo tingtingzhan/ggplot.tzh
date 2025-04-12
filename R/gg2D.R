@@ -22,6 +22,7 @@
 #' 
 #' @importFrom metR geom_text_contour
 #' @importFrom reshape2 melt
+#' @importFrom rlang .data
 #' @export
 ggContour <- function(data, z, x, y, ...) {
   
@@ -39,7 +40,9 @@ ggContour <- function(data, z, x, y, ...) {
   
   if (!is.data.frame(data)) stop('input must be convertible to data.frame')
   
-  mp <- eval(call('aes', x = x, y = y, z = z, colour = quote(after_stat(level))))
+  mp <- aes(x = .data[[x]], y = .data[[y]], z = .data[[z]], 
+            colour = eval(after_stat(level))) # devtools::check *still* warns on unknown 'level'
+
   ggplot() + 
     geom_contour(data = data, mapping = mp, show.legend = FALSE) + 
     # difference between ?ggplot2::geom_contour vs. ?ggplot2::stat_contour ?

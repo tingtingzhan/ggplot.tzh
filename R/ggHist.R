@@ -57,6 +57,7 @@
 #' ggHist(EXP_dft)
 #' 
 #' @importFrom scales percent
+#' @importFrom rlang .data
 #' @importFrom zoo scale_x_yearmon scale_x_yearqtr scale_y_yearmon scale_y_yearqtr
 #' @export
 ggHist <- function(object, rel = FALSE, by_integer = FALSE, ...) {
@@ -75,8 +76,11 @@ ggHist <- function(object, rel = FALSE, by_integer = FALSE, ...) {
     quote(as.POSIXct(obj)) # ?base::as.POSIXct.POSIXlt ?base::as.POSIXct.default
   }, difftime = {
     quote(unclass(obj))
-  }, quote(c(obj)))
+  }, quote(obj))
+  
   mp <- if (rel) eval(call('aes', x = aes_x, y = quote(after_stat(density)))) else eval(call('aes', x = aes_x))
+  #mp <- if (rel) aes(x = .data[[aes_x]], y = after_stat(density)) else aes(x = .data[[aes_x]])
+  # um..
   
   ggplot() + 
     geom_histogram(mapping = mp, bins = if (by_integer) {

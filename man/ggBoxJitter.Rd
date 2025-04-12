@@ -44,5 +44,4 @@ ggBoxJitter(data = CO2, y = uptake, x = Plant, colour = Type, violin = TRUE) +
 #ggBoxJitter(list(stack.loss, precip))
 #ggBoxJitter(list(stack.loss, btmean2 = boot_mean(precip, R = 999)))
 #ggBoxJitter(lapply(list(stack.loss, precip), boot_mean, R = 999))
-
 }
