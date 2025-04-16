@@ -41,7 +41,9 @@ ggContour <- function(data, z, x, y, ...) {
   if (!is.data.frame(data)) stop('input must be convertible to data.frame')
   
   mp <- aes(x = .data[[x]], y = .data[[y]], z = .data[[z]], 
-            colour = eval(after_stat(level))) # devtools::check *still* warns on unknown 'level'
+            #colour = eval(after_stat(level))) # devtools::check *still* warns on unknown 'level'
+            #colour = after_stat(level)) # devtools::check warns on unknown 'level'
+            colour = after_stat(.data$level)) # !!!!!!
 
   ggplot() + 
     geom_contour(data = data, mapping = mp, show.legend = FALSE) + 
