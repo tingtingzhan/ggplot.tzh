@@ -56,7 +56,7 @@
 #' stopifnot(is.double(EXP_dft), !is.numeric(EXP_dft))
 #' ggHist(EXP_dft)
 #' 
-#' @importFrom scales percent
+#' @importFrom scales label_percent
 #' @importFrom rlang .data
 #' @importFrom zoo scale_x_yearmon scale_x_yearqtr scale_y_yearmon scale_y_yearqtr
 #' @export
@@ -86,7 +86,7 @@ ggHist <- function(object, rel = FALSE, by_integer = FALSE, ...) {
     geom_histogram(mapping = mp, bins = if (by_integer) {
       ceiling(max(obj)) - floor(min(obj)) + 1L
     } else 30L, colour = 'white', alpha = .1) + 
-    (if (rel) scale_y_continuous(labels = function(x) sprintf(fmt = '%.0f%%', 1e2*x))) + 
+    (if (rel) scale_y_continuous(labels = label_percent())) + 
     switch(cls, yearmon = scale_x_yearmon(), yearqtr = scale_x_yearqtr(format = '%Y Q%q')) +
     labs(x = paste0(deparse1(substitute(object)), switch(cls, difftime = {
       paste0(' in ', units(object))
