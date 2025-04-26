@@ -22,10 +22,6 @@
 #' 
 #' @examples 
 #' library(ggplot2)
-#' theme_set(theme(
-#'  legend.position = 'inside',
-#'  legend.position.inside = c(.8, .3)
-#' ))
 #' ggScatter(iris, x = Sepal.Length, y = Petal.Length)
 #' ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species)
 #' library(plotly)
@@ -124,9 +120,10 @@ cor_test_sum <- function(x, ...) {
 #' 
 #' @examples
 #' library(ggplot2); theme_set(theme_bw())
-#' (p = ggScatter2(swiss, y1 = Fertility, y2 = Agriculture, x = Infant.Mortality))
-#' p + theme_minimal() # not ideal!
+#' ggScatter2(swiss, y1 = Fertility, y2 = Agriculture, x = Infant.Mortality)
 #' 
+#' @importFrom scales pal_hue
+#' @importFrom rlang .data
 #' @export
 ggScatter2 <- function(
     data, 
@@ -141,31 +138,38 @@ ggScatter2 <- function(
   y2_chr <- deparse1(y2)
   x <- substitute(x)
   
+  col <- pal_hue()(2L)
+  
   if (is.list(data) && !is.data.frame(data)) {
     data <- as.data.frame.list(data) # let err
   } else if (is.matrix(data)) {
     data <- as.data.frame.matrix(data) # let err
   }
   
-  p <- ggplot(data = data) + 
-    geom_jitter(mapping = eval(call('aes', x = x, y = y1, colour = y1_chr, shape = y1_chr)), 
-                width = jitter, height = jitter, ...) + 
-    geom_jitter(mapping = eval(call('aes', x = x, y = y2, colour = y2_chr, shape = y2_chr)), 
-                width = jitter, height = jitter, ...) + 
-    scale_y_continuous(sec.axis = sec_axis(name = y2_chr, trans = ~.)) +
-    labs(colour = '', shape = '')
-  
-  g <- ggplot_build(p) # ggplot2:::ggplot_build.ggplot
-  cols <- vapply(g$data, FUN = \(i) unique.default(i[['colour']]), FUN.VALUE = '')
-  p + theme(
-    axis.text.y = element_text(colour = cols[1L], face = 'bold'),
-    axis.ticks.y = element_line(colour = cols[1L], linewidth = 1),
-    axis.title.y = element_text(colour = cols[1L], face = 'bold'),
-    axis.text.y.right = element_text(colour = cols[2L]),
-    axis.ticks.y.right = element_line(colour = cols[2L]),
-    axis.title.y.right = element_text(colour = cols[2L]),
-    legend.position = 'none'
-  )
+  ggplot(data = data) + 
+    
+    geom_jitter(
+      data = data, 
+      mapping = aes(x = .data[[x]], y = .data[[y1]]), 
+      colour = col[1L], shape = 1L, 
+      width = jitter, height = jitter, show.legend = FALSE, ...) + 
+    
+    geom_jitter(
+      data = data,
+      mapping = aes(x = .data[[x]], y = .data[[y2]]), 
+      colour = col[2L], shape = 2L, 
+      width = jitter, height = jitter, show.legend = FALSE, ...) + 
+    
+    scale_y_continuous(sec.axis = sec_axis(name = y2_chr, trans = ~.)) + 
+    
+    theme(
+      axis.text.y = element_text(colour = col[1L]),
+      axis.ticks.y = element_line(colour = col[1L]),
+      axis.title.y = element_text(colour = col[1L]),
+      axis.text.y.right = element_text(colour = col[2L]),
+      axis.ticks.y.right = element_line(colour = col[2L]),
+      axis.title.y.right = element_text(colour = col[2L])
+    )
   
 }
 

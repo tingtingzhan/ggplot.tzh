@@ -42,10 +42,6 @@ Potential name clash with \code{ggpubr::ggscatter}.
 }
 \examples{
 library(ggplot2)
-theme_set(theme(
- legend.position = 'inside',
- legend.position.inside = c(.8, .3)
-))
 ggScatter(iris, x = Sepal.Length, y = Petal.Length)
 ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species)
 library(plotly)
@@ -60,7 +56,6 @@ car = mtcars |> within(expr = {
 ggScatter(car, x = mpg, y = drat, colour = cyl, shape = vs) + facet_grid(cols = vars(gear))
 # not sure how to facet plotly
 library(ggplot2); theme_set(theme_bw())
-(p = ggScatter2(swiss, y1 = Fertility, y2 = Agriculture, x = Infant.Mortality))
-p + theme_minimal() # not ideal!
+ggScatter2(swiss, y1 = Fertility, y2 = Agriculture, x = Infant.Mortality)
 
 }
