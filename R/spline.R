@@ -16,6 +16,7 @@
 #' 
 #' @examples 
 #' library(splines)
+#' library(ggplot2)
 #' class(x1 <- interpSpline(obj1 = weight ~ height, obj2 = women, bSpline = TRUE))
 #' plot(x1)
 #' autoplot(x1)
@@ -23,6 +24,7 @@
 #' class(x2 <- polySpline(x1))
 #' plot(x2)
 #' autoplot(x2)
+#' @importFrom ggplot2 autoplot
 #' @export autoplot.spline
 #' @export
 autoplot.spline <- function(object, ...) {

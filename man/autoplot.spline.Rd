@@ -22,6 +22,7 @@ Function \link{autoplot.spline} is not substantially different from \code{spline
 }
 \examples{
 library(splines)
+library(ggplot2)
 class(x1 <- interpSpline(obj1 = weight ~ height, obj2 = women, bSpline = TRUE))
 plot(x1)
 autoplot(x1)
