@@ -21,13 +21,11 @@ Function \link{autoplot.spline} returns a \link[ggplot2]{ggplot} figure.
 Function \link{autoplot.spline} is not substantially different from \code{splines:::plot.spline}.
 }
 \examples{
-library(splines)
-library(ggplot2)
-class(x1 <- interpSpline(obj1 = weight ~ height, obj2 = women, bSpline = TRUE))
+class(x1 <- splines::interpSpline(obj1 = weight ~ height, obj2 = women, bSpline = TRUE))
 plot(x1)
 autoplot(x1)
 
-class(x2 <- polySpline(x1))
+class(x2 <- splines::polySpline(x1))
 plot(x2)
 autoplot(x2)
 }
