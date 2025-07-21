@@ -33,7 +33,7 @@ ggScatter2(data, y1, y2, x, jitter = 0, ...)
 ..
 }
 \details{
-Function \link{ggScatter} produces a scatter plot.
+Function \code{\link[=ggScatter]{ggScatter()}} produces a scatter plot.
 
 Function \link{ggScatter2} produces a scatter plot with two vertical axes.
 }
@@ -41,7 +41,6 @@ Function \link{ggScatter2} produces a scatter plot with two vertical axes.
 Potential name clash with \code{ggpubr::ggscatter}.
 }
 \examples{
-library(ggplot2)
 ggScatter(iris, x = Sepal.Length, y = Petal.Length)
 ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species)
 library(plotly)
@@ -55,7 +54,6 @@ car = mtcars |> within(expr = {
 })
 ggScatter(car, x = mpg, y = drat, colour = cyl, shape = vs) + facet_grid(cols = vars(gear))
 # not sure how to facet plotly
-library(ggplot2); theme_set(theme_bw())
 ggScatter2(swiss, y1 = Fertility, y2 = Agriculture, x = Infant.Mortality)
 
 }

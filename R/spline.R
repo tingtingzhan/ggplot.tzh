@@ -21,7 +21,8 @@
 #' 
 #' class(x2 <- splines::polySpline(x1))
 #' plot(x2)
-#' autoplot(x2)
+#' Bautoplot(x2)
+#' @keywords internal
 #' @importFrom ggplot2 autoplot
 #' @export autoplot.spline
 #' @export

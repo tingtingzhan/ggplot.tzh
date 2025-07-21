@@ -15,13 +15,12 @@
 #' 
 #' @details 
 #' 
-#' Function [ggScatter] produces a scatter plot. 
+#' Function [ggScatter()] produces a scatter plot. 
 #' 
 #' @note
 #' Potential name clash with `ggpubr::ggscatter`.
 #' 
 #' @examples 
-#' library(ggplot2)
 #' ggScatter(iris, x = Sepal.Length, y = Petal.Length)
 #' ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species)
 #' library(plotly)
@@ -119,7 +118,6 @@ cor_test_sum <- function(x, ...) {
 #' Function [ggScatter2] produces a scatter plot with two vertical axes.
 #' 
 #' @examples
-#' library(ggplot2); theme_set(theme_bw())
 #' ggScatter2(swiss, y1 = Fertility, y2 = Agriculture, x = Infant.Mortality)
 #' 
 #' @importFrom scales pal_hue

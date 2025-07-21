@@ -29,3 +29,4 @@ class(x2 <- splines::polySpline(x1))
 plot(x2)
 autoplot(x2)
 }
+\keyword{internal}
