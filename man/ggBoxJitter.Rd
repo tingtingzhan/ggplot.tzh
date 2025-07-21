@@ -42,6 +42,7 @@ ggBoxJitter(data = CO2, y = uptake, x = Type)
 ggBoxJitter(data = CO2, y = uptake, x = Type, caption = t.test)
 ggBoxJitter(data = CO2, y = uptake, x = Type, caption = wilcox.test)
 ggBoxJitter(data = CO2, y = log(uptake), x = Type, caption = t.test)
+ggBoxJitter(data = CO2, y = log1p(uptake), x = Type, caption = t.test)
 }
 
 ggBoxJitter(data = CO2, y = uptake, x = Treatment, colour = Type)

@@ -27,6 +27,7 @@
 #' ggBoxJitter(data = CO2, y = uptake, x = Type, caption = t.test)
 #' ggBoxJitter(data = CO2, y = uptake, x = Type, caption = wilcox.test)
 #' ggBoxJitter(data = CO2, y = log(uptake), x = Type, caption = t.test)
+#' ggBoxJitter(data = CO2, y = log1p(uptake), x = Type, caption = t.test)
 #' }
 #' 
 #' ggBoxJitter(data = CO2, y = uptake, x = Treatment, colour = Type)
@@ -70,9 +71,10 @@ ggBoxJitter <- function(
   
   if (is.call(y)) {
     if (length(y) != 2L) stop('not supported')
-    if (y[[1L]] == 'log') {
-      scale_y <- scale_y_continuous(trans = 'log')
-    } else stop('unsupported: ', deparse1(y[[1L]]))
+    y1. <- deparse1(y[[1L]])
+    if (y1. %in% c('log', 'log1p')) {
+      scale_y <- scale_y_continuous(trans = y1.)
+    } else stop('unsupported: ', y1.)
     y0 <- y[[2L]]
     if (!is.symbol(y0)) stop('not supported')
   } else {
