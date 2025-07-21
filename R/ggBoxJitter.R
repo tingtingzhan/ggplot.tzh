@@ -22,15 +22,17 @@
 #' 
 #' @examples 
 #' ggBoxJitter(data = CO2, y = uptake, x = Type)
-#' #ggBoxJitter(data = CO2, y = uptake, x = Type, caption = t.test)
-#' #ggBoxJitter(data = CO2, y = uptake, x = Type, caption = wilcox.test)
+#' \dontrun{
+#' # unicode error
+#' ggBoxJitter(data = CO2, y = uptake, x = Type, caption = t.test)
+#' ggBoxJitter(data = CO2, y = uptake, x = Type, caption = wilcox.test)
+#' ggBoxJitter(data = CO2, y = log(uptake), x = Type, caption = t.test)
+#' }
+#' 
 #' ggBoxJitter(data = CO2, y = uptake, x = Treatment, colour = Type)
 #' ggBoxJitter(data = CO2, y = uptake, x = Plant, colour = Type, violin = TRUE) + 
 #'   facet_grid(rows = vars(Treatment))
 #' 
-#' #ggBoxJitter(list(stack.loss, precip))
-#' #ggBoxJitter(list(stack.loss, btmean2 = boot_mean(precip, R = 999)))
-#' #ggBoxJitter(lapply(list(stack.loss, precip), boot_mean, R = 999))
 #' @keywords internal
 #' @importFrom rlang .data
 #' @importFrom stats as.formula t.test wilcox.test
@@ -66,17 +68,29 @@ ggBoxJitter <- function(
     
   }
   
-  if (is.null(colour)) {
-    mp_line <- mp_point <- aes(x = .data[[x]], y = .data[[y]])
+  if (is.call(y)) {
+    if (length(y) != 2L) stop('not supported')
+    if (y[[1L]] == 'log') {
+      scale_y <- scale_y_continuous(trans = 'log')
+    } else stop('unsupported: ', deparse1(y[[1L]]))
+    y0 <- y[[2L]]
+    if (!is.symbol(y0)) stop('not supported')
   } else {
-    mp_line <- aes(x = .data[[x]], y = .data[[y]], colour = .data[[colour]])
-    mp_point <- aes(x = .data[[x]], y = .data[[y]], colour = .data[[colour]], shape = .data[[colour]])
+    y0 <- y
+    scale_y <- NULL
+  }
+  
+  if (is.null(colour)) {
+    mp_line <- mp_point <- aes(x = .data[[x]], y = .data[[y0]])
+  } else {
+    mp_line <- aes(x = .data[[x]], y = .data[[y0]], colour = .data[[colour]])
+    mp_point <- aes(x = .data[[x]], y = .data[[y0]], colour = .data[[colour]], shape = .data[[colour]])
   }
 
   if (!missing(caption) && is.function(caption)) {
     d <- data[c(all.vars(x), all.vars(y))] |>
       na.omit() # ?stats:::na.omit.data.frame
-    fom <- call(name = '~', y, x) |>
+    fom <- call(name = '~', y, x) |> # not `y0` !!
       as.formula()
     if (identical(caption, t.test)) {
       caption_text <- sprintf(
@@ -109,6 +123,7 @@ ggBoxJitter <- function(
         position_jitterdodge(dodge.width = dodge.width, jitter.width = .1)
       } else position_jitter(width = .03, height = 0)
     ) +
+    scale_y +
     labs(
       title = data.name,
       caption = caption_text

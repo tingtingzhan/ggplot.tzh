@@ -37,14 +37,16 @@ Stop doing \link[ggplot2]{geom_violin}, need to educate people what they are.
 }
 \examples{
 ggBoxJitter(data = CO2, y = uptake, x = Type)
-#ggBoxJitter(data = CO2, y = uptake, x = Type, caption = t.test)
-#ggBoxJitter(data = CO2, y = uptake, x = Type, caption = wilcox.test)
+\dontrun{
+# unicode error
+ggBoxJitter(data = CO2, y = uptake, x = Type, caption = t.test)
+ggBoxJitter(data = CO2, y = uptake, x = Type, caption = wilcox.test)
+ggBoxJitter(data = CO2, y = log(uptake), x = Type, caption = t.test)
+}
+
 ggBoxJitter(data = CO2, y = uptake, x = Treatment, colour = Type)
 ggBoxJitter(data = CO2, y = uptake, x = Plant, colour = Type, violin = TRUE) + 
   facet_grid(rows = vars(Treatment))
 
-#ggBoxJitter(list(stack.loss, precip))
-#ggBoxJitter(list(stack.loss, btmean2 = boot_mean(precip, R = 999)))
-#ggBoxJitter(lapply(list(stack.loss, precip), boot_mean, R = 999))
 }
 \keyword{internal}
