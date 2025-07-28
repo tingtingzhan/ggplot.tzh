@@ -14,7 +14,7 @@
 #' attr(x, 'levels') = letters[1:4]
 #' class(x) = 'factor'
 #' head(x)
-#' # ggBar(x, position = 'dodge', colour = 'white') # move to vignette
+#' ggBar(x, position = 'dodge', colour = 'white') # move to vignette
 #' 
 #' @importFrom stats na.omit
 #' @export

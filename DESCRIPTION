@@ -13,5 +13,5 @@ Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
 Depends: R (>= 4.5), ggplot2 (== 3.5.2)
-Imports: dplyr (== 1.1.4), rlang (== 1.1.6), scales (== 1.4.0), zoo (== 1.8.14), rmd.tzh
-Suggests: splines, plotly
+Imports: dplyr (== 1.1.4), rlang (== 1.1.6), scales (== 1.4.0), zoo (== 1.8.14)
+Suggests: rmd.tzh

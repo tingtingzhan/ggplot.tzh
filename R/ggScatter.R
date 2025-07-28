@@ -21,7 +21,6 @@
 #' Potential name clash with `ggpubr::ggscatter`.
 #' 
 #' @examples 
-#' \dontrun{
 #' ggScatter(iris, x = Sepal.Length, y = Petal.Length)
 #' ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species)
 #' car = mtcars |> within(expr = {
@@ -30,7 +29,6 @@
 #' })
 #' ggScatter(car, x = mpg, y = drat, colour = cyl, shape = vs) + 
 #'   facet_grid(cols = vars(gear))
-#' }
 #' @name ggScatter
 #' @keywords internal
 #' @importFrom dplyr vars
@@ -116,9 +114,7 @@ cor_test_sum <- function(x, ...) {
 #' Function [ggScatter2()] produces a scatter plot with two vertical axes.
 #' 
 #' @examples
-#' \dontrun{
 #' ggScatter2(swiss, y1 = Fertility, y2 = Agriculture, x = Infant.Mortality)
-#' }
 #' @importFrom scales pal_hue
 #' @importFrom rlang .data
 #' @export

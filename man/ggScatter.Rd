@@ -41,7 +41,6 @@ Function \code{\link[=ggScatter2]{ggScatter2()}} produces a scatter plot with tw
 Potential name clash with \code{ggpubr::ggscatter}.
 }
 \examples{
-\dontrun{
 ggScatter(iris, x = Sepal.Length, y = Petal.Length)
 ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species)
 car = mtcars |> within(expr = {
@@ -50,9 +49,6 @@ car = mtcars |> within(expr = {
 })
 ggScatter(car, x = mpg, y = drat, colour = cyl, shape = vs) + 
   facet_grid(cols = vars(gear))
-}
-\dontrun{
 ggScatter2(swiss, y1 = Fertility, y2 = Agriculture, x = Infant.Mortality)
-}
 }
 \keyword{internal}

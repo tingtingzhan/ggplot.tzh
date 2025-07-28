@@ -12,7 +12,7 @@ ggBoxJitter(
   violin = FALSE,
   dodge.width = 0.5,
   data.name = deparse1(substitute(data)),
-  caption,
+  htest,
   ...
 )
 }
@@ -36,19 +36,16 @@ ggBoxJitter(
 Stop doing \link[ggplot2]{geom_violin}, need to educate people what they are.
 }
 \examples{
-\dontrun{
-# unicode error (as rmd.tzh use options :) )
 ggBoxJitter(data = CO2, y = uptake, x = Type)
-
-ggBoxJitter(data = CO2, y = uptake, x = Type, caption = t.test)
-ggBoxJitter(data = CO2, y = uptake, x = Type, caption = wilcox.test)
-ggBoxJitter(data = CO2, y = log(uptake), x = Type, caption = t.test)
-ggBoxJitter(data = CO2, y = log1p(uptake), x = Type, caption = t.test)
-
 ggBoxJitter(data = CO2, y = uptake, x = Treatment, colour = Type)
 ggBoxJitter(data = CO2, y = uptake, x = Plant, colour = Type, violin = TRUE) + 
   facet_grid(rows = vars(Treatment))
-}
 
+library(rmd.tzh); list(
+  '`t.test`' = ggBoxJitter(data = CO2, y = uptake, x = Type, htest = t.test),
+  '`wilcox.test`' = ggBoxJitter(data = CO2, y = uptake, x = Type, htest = wilcox.test),
+  '`t.test` on `log`' = ggBoxJitter(data = CO2, y = log(uptake), x = Type, htest = t.test),
+  '`t.test` on `log1p`' = ggBoxJitter(data = CO2, y = log1p(uptake), x = Type, htest = t.test)
+) |> render_(file = 'ggplot with htest')
 }
 \keyword{internal}
