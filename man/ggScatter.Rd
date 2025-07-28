@@ -35,25 +35,24 @@ ggScatter2(data, y1, y2, x, jitter = 0, ...)
 \details{
 Function \code{\link[=ggScatter]{ggScatter()}} produces a scatter plot.
 
-Function \link{ggScatter2} produces a scatter plot with two vertical axes.
+Function \code{\link[=ggScatter2]{ggScatter2()}} produces a scatter plot with two vertical axes.
 }
 \note{
 Potential name clash with \code{ggpubr::ggscatter}.
 }
 \examples{
+\dontrun{
 ggScatter(iris, x = Sepal.Length, y = Petal.Length)
 ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species)
-library(plotly)
-plot_ly(iris, x = ~Sepal.Length, y = ~Petal.Length, type = 'scatter', mode = 'markers')
-plot_ly(iris, x = ~Sepal.Length, y = ~Petal.Length, color = ~Species, 
-  type = 'scatter', mode = 'markers')
-
 car = mtcars |> within(expr = {
  cyl = factor(cyl)
  vs = as.logical(vs)
 })
-ggScatter(car, x = mpg, y = drat, colour = cyl, shape = vs) + facet_grid(cols = vars(gear))
-# not sure how to facet plotly
-ggScatter2(swiss, y1 = Fertility, y2 = Agriculture, x = Infant.Mortality)
-
+ggScatter(car, x = mpg, y = drat, colour = cyl, shape = vs) + 
+  facet_grid(cols = vars(gear))
 }
+\dontrun{
+ggScatter2(swiss, y1 = Fertility, y2 = Agriculture, x = Infant.Mortality)
+}
+}
+\keyword{internal}

@@ -17,7 +17,7 @@
 #' Function [ggHist] is the \CRANpkg{ggplot2} version of \link[graphics]{hist}
 #' 
 #' @examples 
-#' 
+#' \dontrun{
 #' ggHist(stack.loss)
 #' ggHist(stack.loss, rel = TRUE)
 #' library(plotly) # https://plotly.com/r/histograms/
@@ -55,7 +55,7 @@
 #' EXP_dft = EXP_Date2 - EXP_Date1
 #' stopifnot(is.double(EXP_dft), !is.numeric(EXP_dft))
 #' ggHist(EXP_dft)
-#' 
+#' }
 #' @importFrom scales label_percent
 #' @importFrom rlang .data
 #' @importFrom zoo scale_x_yearmon scale_x_yearqtr scale_y_yearmon scale_y_yearqtr

@@ -21,23 +21,24 @@
 #' Stop doing \link[ggplot2]{geom_violin}, need to educate people what they are.
 #' 
 #' @examples 
-#' ggBoxJitter(data = CO2, y = uptake, x = Type)
 #' \dontrun{
-#' # unicode error
+#' # unicode error (as rmd.tzh use options :) )
+#' ggBoxJitter(data = CO2, y = uptake, x = Type)
+#' 
 #' ggBoxJitter(data = CO2, y = uptake, x = Type, caption = t.test)
 #' ggBoxJitter(data = CO2, y = uptake, x = Type, caption = wilcox.test)
 #' ggBoxJitter(data = CO2, y = log(uptake), x = Type, caption = t.test)
 #' ggBoxJitter(data = CO2, y = log1p(uptake), x = Type, caption = t.test)
-#' }
 #' 
 #' ggBoxJitter(data = CO2, y = uptake, x = Treatment, colour = Type)
 #' ggBoxJitter(data = CO2, y = uptake, x = Plant, colour = Type, violin = TRUE) + 
 #'   facet_grid(rows = vars(Treatment))
+#' }
 #' 
 #' @keywords internal
 #' @importFrom rlang .data
 #' @importFrom stats as.formula t.test wilcox.test
-#' @importFrom scales.tzh label_pvalue_sym
+#' @importFrom rmd.tzh label_pvalue_sym
 #' @export
 ggBoxJitter <- function(
     data, y, x, 

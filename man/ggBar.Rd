@@ -17,11 +17,11 @@ ggBar(x, na.rm = TRUE, ...)
 ggBar
 }
 \examples{
-x = array(sample.int(4L, size = 100L, replace = TRUE), 
-  dim = c(20L, 5L), dimnames = list(NULL, LETTERS[1:5]))
+x = sample.int(4L, size = 100L, replace = TRUE) |> 
+  array(dim = c(20L, 5L), dimnames = list(NULL, LETTERS[1:5]))
 attr(x, 'levels') = letters[1:4]
 class(x) = 'factor'
 head(x)
-ggBar(x, position = 'dodge', colour = 'white')
+# ggBar(x, position = 'dodge', colour = 'white') # move to vignette
 
 }
