@@ -41,11 +41,11 @@ ggBoxJitter(data = CO2, y = uptake, x = Treatment, colour = Type)
 ggBoxJitter(data = CO2, y = uptake, x = Plant, colour = Type, violin = TRUE) + 
   facet_grid(rows = vars(Treatment))
 
-library(rmd.tzh); list(
+list(
   '`t.test`' = ggBoxJitter(data = CO2, y = uptake, x = Type, htest = t.test),
   '`wilcox.test`' = ggBoxJitter(data = CO2, y = uptake, x = Type, htest = wilcox.test),
   '`t.test` on `log`' = ggBoxJitter(data = CO2, y = log(uptake), x = Type, htest = t.test),
   '`t.test` on `log1p`' = ggBoxJitter(data = CO2, y = log1p(uptake), x = Type, htest = t.test)
-) |> render_(file = 'ggplot with htest')
+) |> rmd.tzh::render_(file = 'ggplot with htest')
 }
 \keyword{internal}
