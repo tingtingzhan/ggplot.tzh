@@ -45,7 +45,8 @@ list(
   '`t.test`' = ggBoxJitter(data = CO2, y = uptake, x = Type, htest = t.test),
   '`wilcox.test`' = ggBoxJitter(data = CO2, y = uptake, x = Type, htest = wilcox.test),
   '`t.test` on `log`' = ggBoxJitter(data = CO2, y = log(uptake), x = Type, htest = t.test),
-  '`t.test` on `log1p`' = ggBoxJitter(data = CO2, y = log1p(uptake), x = Type, htest = t.test)
+  '`t.test` on `log1p`' = ggBoxJitter(data = CO2, y = log1p(uptake), x = Type, htest = t.test),
+  '`anova`' = ggBoxJitter(data = penguins, y = bill_len, x = species, htest = aov)
 ) |> rmd.tzh::render_(file = 'ggplot with htest')
 }
 \keyword{internal}
