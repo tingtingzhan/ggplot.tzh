@@ -12,6 +12,6 @@ Authors@R: c(person(given = "Tingting", family =
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
-Depends: R (>= 4.5), ggplot2 (== 4.0.1)
-Imports: dplyr (== 1.1.4), rlang (== 1.1.7), scales (== 1.4.0), zoo (== 1.8.15)
+Depends: R (>= 4.5), ggplot2 (== 4.0.2)
+Imports: dplyr (== 1.2.0), rlang (== 1.1.7), scales (== 1.4.0), zoo (== 1.8.15)
 Suggests: rmd.tzh
