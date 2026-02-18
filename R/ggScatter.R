@@ -1,4 +1,12 @@
 
+if (FALSE) {
+  library(ggplot2)
+  ggplot(data = iris, mapping = aes(x = Sepal.Length, y = Petal.Length, colour = Species)) + 
+    geom_point() + 
+    ggpubr::stat_cor()
+}
+
+
 #' @title Scatter Plots using \CRANpkg{ggplot2}
 #' 
 #' @description ..
@@ -22,7 +30,8 @@
 #' 
 #' @examples 
 #' ggScatter(iris, x = Sepal.Length, y = Petal.Length)
-#' ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species)
+#' ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species) +
+#'  ggpubr::stat_cor()
 #' car = mtcars |> within(expr = {
 #'  cyl = factor(cyl)
 #'  vs = as.logical(vs)
@@ -32,7 +41,6 @@
 #' @name ggScatter
 #' @keywords internal
 #' @importFrom dplyr vars
-#' @importFrom stats cor.test
 #' @export
 ggScatter <- function(
     data, 
@@ -65,45 +73,22 @@ ggScatter <- function(
     paste0(x, ' in ', units(xval))
   } else x
   
-  # correlation coefficient
-  grp <- unique(c(as.character(colour), as.character(shape)))
-  if (length(grp)) {
-    names(grp) <- grp
-    corr <- lapply(grp, FUN = \(g) { # (g = grp[[1L]])
-      ds <- split.data.frame(x = data, f = data[[g]])
-      names(ds) <- paste(g, names(ds), sep = '=')
-      cor_ <- lapply(ds, FUN = \(d) {
-        cor_test_sum(cor.test(d[[y]], d[[x]]))
-      })
-      do.call(rbind, args = cor_)
-    })
-  } else {
-    cor_ <- cor_test_sum(cor.test(data[[y]], data[[x]]))
-    corr <- array(cor_, dim = c(1L, 1L), dimnames = list(data.name, names(cor_)))
-  }
-  
-  p <- ggplot(data = data) + 
-    geom_jitter(mapping = eval(call('aes', x = x, y = y, colour = colour, shape = shape)), 
-                width = jitter, height = jitter, ...) + 
+  p <- ggplot(
+    data = data,
+    mapping = eval(call(name = 'aes', x = x, y = y, colour = colour, shape = shape))
+  ) + 
+    geom_jitter(width = jitter, height = jitter, ...) + 
     labs(
       x = xlab, y = ylab, 
       colour = colour, shape = shape,
       title = data.name
     )
-  attr(p, which = 'corr') <- corr
+  
   return(p)
   
 }
 
 
-
-cor_test_sum <- function(x, ...) {
-  # `x` is return of ?stats::cor.test
-  #sprintf(fmt = '%s=%.2f, p=%.3f', x$method, x$estimate, x$p.value)
-  ret <- sprintf(fmt = '%.2f, p=%.3f', x$estimate, x$p.value)
-  names(ret) <- x$method
-  return(ret)
-}
 
 
 

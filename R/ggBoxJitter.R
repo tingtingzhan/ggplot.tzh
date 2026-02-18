@@ -25,17 +25,8 @@
 #' ggBoxJitter(data = CO2, y = uptake, x = Treatment, colour = Type)
 #' ggBoxJitter(data = CO2, y = uptake, x = Plant, colour = Type, violin = TRUE) + 
 #'   facet_grid(rows = vars(Treatment))
-#' 
-#' list(
-#'   '`t.test`' = ggBoxJitter(data = CO2, y = uptake, x = Type, htest = t.test),
-#'   '`wilcox.test`' = ggBoxJitter(data = CO2, y = uptake, x = Type, htest = wilcox.test),
-#'   '`t.test` on `log`' = ggBoxJitter(data = CO2, y = log(uptake), x = Type, htest = t.test),
-#'   '`t.test` on `log1p`' = ggBoxJitter(data = CO2, y = log1p(uptake), x = Type, htest = t.test),
-#'   '`anova`' = ggBoxJitter(data = penguins, y = bill_len, x = species, htest = aov)
-#' ) |> fastmd::render_(file = 'ggplot with htest')
 #' @keywords internal
 #' @importFrom rlang .data
-#' @importFrom stats as.formula t.test wilcox.test aov anova
 #' @export
 ggBoxJitter <- function(
     data, y, x, 
@@ -87,21 +78,6 @@ ggBoxJitter <- function(
     mp_point <- aes(x = .data[[x]], y = .data[[y0]], colour = .data[[colour]], shape = .data[[colour]])
   }
 
-  if (!missing(htest) && is.function(htest)) {
-    d <- data[c(all.vars(x), all.vars(y))] |>
-      na.omit() # ?stats:::na.omit.data.frame
-    fom <- call(name = '~', y, x) |> # not `y0` !!
-      as.formula()
-    if (identical(htest, t.test)) {
-      htest_ <- t.test(formula = fom, data = d)
-    } else if (identical(htest, wilcox.test)) {
-      suppressWarnings(htest_ <- wilcox.test(formula = fom, data = d))
-    } else if (identical(htest, aov)) {
-      htest_ <- aov(formula = fom, data = d) |> 
-        anova() # class 'anova', not 'htest'
-    } else stop('unsupported `htest`')
-  } else htest_ <- NULL
-  
   p <- ggplot() + 
     (if (violin) geom_violin(data = data, mapping = mp_line, position = position_dodge(width = dodge.width))) + 
     geom_boxplot(
@@ -122,7 +98,6 @@ ggBoxJitter <- function(
     labs(
       title = data.name
     )
-  attr(p, which = 'htest') <- htest_
   return(p)
   
 }

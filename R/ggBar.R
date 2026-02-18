@@ -15,8 +15,7 @@
 #' class(x) = 'factor'
 #' head(x)
 #' ggBar(x, position = 'dodge', colour = 'white') # move to vignette
-#' 
-#' @importFrom stats na.omit
+#' @keywords internal
 #' @export
 ggBar <- function(
     x, 

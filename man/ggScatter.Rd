@@ -42,7 +42,8 @@ Potential name clash with \code{ggpubr::ggscatter}.
 }
 \examples{
 ggScatter(iris, x = Sepal.Length, y = Petal.Length)
-ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species)
+ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species) +
+ ggpubr::stat_cor()
 car = mtcars |> within(expr = {
  cyl = factor(cyl)
  vs = as.logical(vs)
