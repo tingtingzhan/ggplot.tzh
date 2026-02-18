@@ -78,10 +78,15 @@ ggHist <- function(object, rel = FALSE, by_integer = FALSE, ...) {
   #mp <- if (rel) aes(x = .data[[aes_x]], y = after_stat(density)) else aes(x = .data[[aes_x]])
   # um..
   
-  ggplot() + 
-    geom_histogram(mapping = mp, bins = if (by_integer) {
-      ceiling(max(obj)) - floor(min(obj)) + 1L
-    } else 30L, colour = 'white', alpha = .1) + 
+  ggplot(
+    mapping = mp
+  ) + 
+    geom_histogram(
+      bins = if (by_integer) {
+        ceiling(max(obj)) - floor(min(obj)) + 1L
+      } else 30L, 
+      colour = 'white', alpha = .1
+    ) + 
     (if (rel) scale_y_continuous(labels = label_percent())) + 
     switch(cls, yearmon = scale_x_yearmon(), yearqtr = scale_x_yearqtr(format = '%Y Q%q')) +
     labs(x = paste0(deparse1(substitute(object)), switch(cls, difftime = {
