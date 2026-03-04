@@ -44,10 +44,12 @@ Potential name clash with \code{ggpubr::ggscatter}.
 ggScatter(iris, x = Sepal.Length, y = Petal.Length)
 ggScatter(iris, x = Sepal.Length, y = Petal.Length, colour = Species) +
  ggpubr::stat_cor()
-car = mtcars |> within(expr = {
- cyl = factor(cyl)
- vs = as.logical(vs)
-})
+ 
+car = datasets::mtcars |> 
+ within.data.frame(expr = {
+  cyl = factor(cyl)
+  vs = as.logical(vs)
+ })
 ggScatter(car, x = mpg, y = drat, colour = cyl, shape = vs) + 
   facet_grid(cols = vars(gear))
 ggScatter2(swiss, y1 = Fertility, y2 = Agriculture, x = Infant.Mortality)

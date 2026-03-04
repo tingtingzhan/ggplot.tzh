@@ -4,9 +4,9 @@
 \name{ggplot.tzh-package}
 \alias{ggplot.tzh}
 \alias{ggplot.tzh-package}
-\title{ggplot.tzh}
+\title{ggplot.tzh: Tingting's Extension of ggplot2}
 \description{
-..
+Tingting's Extension of ggplot2.
 }
 \author{
 \strong{Maintainer}: Tingting Zhan \email{tingtingzhan@gmail.com} (\href{https://orcid.org/0000-0001-9971-4844}{ORCID})
